@@ -5,6 +5,7 @@ __pycache__/
 .Python
 build/
 .idea/
+credentials.*
 
 # Jupyter Notebook
 .ipynb_checkpoints
