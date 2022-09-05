@@ -3,10 +3,11 @@ import datetime
 from flask import Flask, request
 from flask import typing as flask_typing
 
-import store
-import api
+from data_saver import store
+from data_saver import api
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 BASE_URL = "https://fake-api-vycpfa6oca-uc.a.run.app"
@@ -28,12 +29,12 @@ def main() -> flask_typing.ResponseReturnValue:
     input_data: dict = request.json
     if "raw_dir" not in input_data:
         path = f"default_path/raw/sales/{datetime.date.today().isoformat()}"
-        print("No path received. Default path set:", path)
+        print("Expected 'raw_dir'. No path received. Default path set:", path)
     else:
         path = f"{input_data['raw_dir']}"
 
     if 'date' not in input_data:
-        sales_date = str(datetime.date.today().isoformat())
+        return {"message": "No 'date' param received. 'date' is obligatory field"}, 400
     else:
         sales_date = input_data["date"]
 
