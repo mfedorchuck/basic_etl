@@ -5,6 +5,10 @@ from fastavro import writer, parse_schema
 
 
 def clear_data_at_directory(path: str) -> None:
+    """
+    Clear all the files in a given directory.
+    Bad practice - we duplicate that function :\
+    """
     for filename in os.listdir(path):
         file_path = os.path.join(path, filename)
         try:
@@ -38,13 +42,15 @@ def transform_and_save_data(raw_dir_path: str, stg_dir_path: str) -> str:
     Transforming .json data into .avro format and save it.
     Return status
     """
+    try:
+        with open(f'{raw_dir_path}/data.json', 'r') as raw_file:
+            data = json.load(raw_file)
+    except FileNotFoundError as e:
+        return str(e)
 
     # Prepare the path
     os.makedirs(name=stg_dir_path, exist_ok=True)
     clear_data_at_directory(stg_dir_path)
-
-    with open(f'{raw_dir_path}/data.json', 'r') as raw_file:
-        data = json.load(raw_file)
 
     schema = get_schema()
 

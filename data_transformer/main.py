@@ -2,7 +2,7 @@ import datetime
 from flask import Flask, request
 from flask import typing as flask_typing
 
-import transform
+from data_transformer import transform
 
 app = Flask(__name__)
 
@@ -17,14 +17,13 @@ def main() -> flask_typing.ResponseReturnValue:
     input_data: dict = request.json
 
     if "raw_dir" not in input_data or "stg_dir" not in input_data:
-        raw_dir_path = f"default_path/raw/sales/{datetime.date.today().isoformat()}"
-        stg_dir_path = f"default_path/stg/sales/{datetime.date.today().isoformat()}"
-        print("No path received. Default path set:", raw_dir_path, stg_dir_path, sep='\n')
+        return {
+                   "message": "No path received. 'raw_dir' and 'stg_dir' need to be specified",
+               }, 400
     else:
         raw_dir_path = f"{input_data['raw_dir']}"
         stg_dir_path = f"{input_data['stg_dir']}"
-
-    print(" --------- ", raw_dir_path, stg_dir_path, " --------- ")
+        print(" --------- ", raw_dir_path, stg_dir_path, " --------- ") if __debug__ else ...
 
     message = transform.transform_and_save_data(raw_dir_path, stg_dir_path)
 
