@@ -37,6 +37,5 @@ def run_data_transformer():
 if __name__ == '__main__':
 
     run_data_saver()
-
     time.sleep(3)
     run_data_transformer()
