@@ -10,3 +10,5 @@ default_path/
 default_path/
 path/to/my/dir
 venv
+
+.DS_Store
