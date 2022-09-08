@@ -1,0 +1,12 @@
+
+path/
+default_path/
+/venv
+/env
+
+.env
+
+.idea
+default_path/
+path/to/my/dir
+venv
