@@ -38,14 +38,11 @@ def main() -> flask_typing.ResponseReturnValue:
     else:
         sales_date = input_data["date"]
 
-    # Get all the sales data (up to 100 pages from API service) in one list
     sales_data_list = api.get_sales(url=BASE_URL, token=AUTH_TOKEN, sales_date=sales_date)
-
-    # Save that sales data local: {path}
-    store_message = store.save_local(path=path, data=sales_data_list)
+    store.save_local(path=path, data=sales_data_list)
 
     return {
-               "message": store_message,
+               "message": "Data retrieved from API and stored successfully",
            }, 201
 
 

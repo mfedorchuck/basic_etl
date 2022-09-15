@@ -21,15 +21,11 @@ def main() -> flask_typing.ResponseReturnValue:
                    "message": "No path received. 'raw_dir' and 'stg_dir' need to be specified",
                }, 400
     else:
-        raw_dir_path = f"{input_data['raw_dir']}"
-        stg_dir_path = f"{input_data['stg_dir']}"
-        print(" --------- ", raw_dir_path, stg_dir_path, " --------- ") if __debug__ else ...
+        transform.transform_and_save_data(input_data['raw_dir'], input_data['stg_dir'])
 
-    message = transform.transform_and_save_data(raw_dir_path, stg_dir_path)
-
-    return {
-               "message": message,
-           }, 201
+        return {
+                   "message": "Data transformed successfully",
+               }, 201
 
 
 if __name__ == "__main__":
