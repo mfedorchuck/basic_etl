@@ -1,18 +1,32 @@
-from data_saver import get_exchange_rate
-from common import notify_tg
-from data_to_sheet import write_data
+import datetime
+from flask import Flask, request
+from flask import typing as flask_typing
+
+from data_transformer import transform
+
+app = Flask(__name__)
 
 
-target_note = get_exchange_rate(bank='mono')
-notify_tg(target_note)
+@app.route('/', methods=['POST'])
+def main() -> flask_typing.ResponseReturnValue:
+    """
+    Controller that accepts command via HTTP and
+    trigger business logic layer: Transforming data
+    """
 
-write_data(target_note)
-notify_tg('it`s done 👌')
+    input_data: dict = request.json
 
+    if "raw_dir" not in input_data or "stg_dir" not in input_data:
+        return {
+                   "message": "No path received. 'raw_dir' and 'stg_dir' need to be specified",
+               }, 400
+    else:
+        transform.transform_and_save_data(input_data['raw_dir'], input_data['stg_dir'])
 
-def main():
-    pass
+        return {
+                   "message": "Data transformed successfully",
+               }, 201
 
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True, host="localhost", port=8002)

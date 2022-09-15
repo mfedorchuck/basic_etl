@@ -1,14 +1,28 @@
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
 path/
-default_path/
-/venv
-/env
+*.json
+*.avro
 
-.env
-
-.idea
-default_path/
-path/to/my/dir
-venv
-
+# Distribution / packaging
+.Python
 .DS_Store
+build/
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
