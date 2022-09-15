@@ -31,11 +31,10 @@ def run_data_transformer():
     }
 
     res = requests.post(f"http://localhost:{JOB2_PORT}/", json=data_to_send)
-    print("\n\nrun_data_transformer response:", res.text, "run_data_transformer status_code:", res.status_code)
+    print("\nrun_data_transformer response:", res.text)
 
 
 if __name__ == '__main__':
-
     run_data_saver()
     time.sleep(3)
     run_data_transformer()
