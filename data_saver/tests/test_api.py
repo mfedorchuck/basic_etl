@@ -13,9 +13,10 @@ class ApiTestCase(TestCase):
         """
         Test with mocked service call
         """
-        get_batch_sales_data.return_value = [{"client": "Bob Marley", "Profit": 12}]
+        get_batch_sales_data.return_value = {
+            "data_response": [{"client": "Bob Marley", "Profit": 12}],
+            "status_code": 404
+        }
         respond = api.get_sales("http://test_url", "test_token", "2022-01-01")
 
-        self.assertEqual(type(respond), type([]))
-
-        print('✅ API test Ok')
+        self.assertListEqual(respond, [])

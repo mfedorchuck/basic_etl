@@ -24,7 +24,6 @@ class MainTestCase(TestCase):
         resp = self.client.post('/', json=json_params)
 
         self.assertEqual(400, resp.status_code)
-        print(f"✅ Raise 400 HTTP code when no 'date' param: Respond: {resp.text}\n")
 
     @mock.patch('data_transformer.transform.transform_and_save_data')
     def test_return_respond_with_mocked_functions(self, transform_and_save_data: mock.MagicMock):
@@ -42,4 +41,3 @@ class MainTestCase(TestCase):
         print()
 
         self.assertEqual(201, resp.status_code)
-        print("✅ Returned 201 HTTP code. Respond status_code: ", resp.status_code)

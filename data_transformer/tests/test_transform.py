@@ -14,8 +14,6 @@ class TransformTestCase(TestCase):
         """
         Test with broken path to file
         """
-        respond = transform.transform_and_save_data(raw_dir_path="test/path", stg_dir_path="test_stg/path")
 
-        # self.assertEqual(test_list, data_from_file)
-
-        print(f"✅ store.save_local test Ok: {respond}")
+        with self.assertRaises(Exception) as context:
+            transform.transform_and_save_data(raw_dir_path="test/path", stg_dir_path="test_stg/path")

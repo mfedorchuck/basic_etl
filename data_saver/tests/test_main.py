@@ -24,7 +24,6 @@ class MainTestCase(TestCase):
         resp = self.client.post('/', json=json_params)
 
         self.assertEqual(400, resp.status_code)
-        print(f"✅ Raise 400 HTTP code when no 'date' param: Respond: {resp.text}\n")
 
     @mock.patch('data_saver.main.store.save_local')
     @mock.patch('data_saver.main.api.get_sales')
@@ -45,4 +44,3 @@ class MainTestCase(TestCase):
         print("resp.status_code: ", resp.status_code)
 
         self.assertEqual(201, resp.status_code)
-        print("✅ Returned 201 HTTP code with mocked save_local AND get_sales functions")

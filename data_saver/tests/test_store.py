@@ -17,7 +17,7 @@ class ApiTestCase(TestCase):
         test_list = [{"key1": "value1"}, {"key2": "value2"}]
         test_path = "test_dir"
 
-        respond = store.save_local(path=test_path, data=test_list)
+        store.save_local(path=test_path, data=test_list)
 
         with open(f"{test_path}/data.json", "r") as file:
             data_from_file = json.load(file)
@@ -26,5 +26,3 @@ class ApiTestCase(TestCase):
         os.rmdir(test_path)
 
         self.assertEqual(test_list, data_from_file)
-
-        print(f"✅ store.save_local test Ok: {respond}")
