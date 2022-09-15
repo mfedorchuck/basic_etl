@@ -3,25 +3,34 @@ import requests
 
 def get_batch_sales_data(url: str, token: str, sales_date: str, page: int) -> dict:
     """get batch of sales (one page)"""
-    data_response = requests.get(
-        url=f"{url}/sales?date={sales_date}&page={page}",
-        headers={'Authorization': token}
+
+    payload = {'page': page, "date": sales_date}
+    header = {'Authorization': token}
+
+    response = requests.get(
+        url=f"{url}/sales",
+        params=payload,
+        headers=header
     )
 
-    return data_response.json()
+    return {"data_response": response.json(), "status_code": response.status_code}
 
 
 def get_sales(url: str, token: str, sales_date: str) -> list:
     """get sales batch by batch and return list of all of them"""
 
     sales_list = []
-    for page in range(1, 100, 1):
-        """Set limit for pages we are ready to process: 100"""
-        batch_data = get_batch_sales_data(url=url, token=token, sales_date=sales_date, page=page)
+    status = 200
+    page = 1
 
-        if type(batch_data) == list and type(batch_data[-1]) == dict and "client" in batch_data[-1]:
-            sales_list.extend(batch_data)
-        else:
-            break
+    while status == 200:
+        batch_data = get_batch_sales_data(url=url, token=token, sales_date=sales_date, page=page)
+        status = batch_data["status_code"]
+
+        if status == 200:
+            sales_data = batch_data["data_response"]
+            sales_list.extend(sales_data)
+
+        page += 1
 
     return sales_list
