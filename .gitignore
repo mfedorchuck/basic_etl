@@ -1,11 +1,13 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.json
+*.avro
 
 # Distribution / packaging
 .Python
+.DS_Store
 build/
 .idea/
-credentials.*
 
 # Jupyter Notebook
 .ipynb_checkpoints
