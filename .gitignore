@@ -8,6 +8,7 @@ __pycache__/
 .DS_Store
 build/
 .idea/
+airflow/
 
 # Jupyter Notebook
 .ipynb_checkpoints
