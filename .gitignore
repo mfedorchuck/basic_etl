@@ -10,6 +10,7 @@ path/
 .DS_Store
 build/
 .idea/
+airflow/
 
 # Jupyter Notebook
 .ipynb_checkpoints
