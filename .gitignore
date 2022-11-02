@@ -4,6 +4,7 @@ __pycache__/
 path/
 *.json
 *.avro
+*.csv
 
 # Distribution / packaging
 .Python
@@ -11,6 +12,10 @@ path/
 build/
 .idea/
 airflow/
+airflow_venv/
+sales/
+data/
+test.*
 
 # Jupyter Notebook
 .ipynb_checkpoints
