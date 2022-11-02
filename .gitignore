@@ -5,12 +5,14 @@ path/
 *.json
 *.avro
 
-# Distribution / packaging
+# Distribution / packaging / local data
 .Python
 .DS_Store
 build/
 .idea/
-airflow/
+test.*
+*.csv
+
 
 # Jupyter Notebook
 .ipynb_checkpoints
@@ -27,3 +29,4 @@ ipython_config.py
 .venv
 env/
 venv/
+airflow_venv/
