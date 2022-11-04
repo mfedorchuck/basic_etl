@@ -11,6 +11,7 @@ path/
 build/
 .idea/
 airflow/
+logs/
 
 # Jupyter Notebook
 .ipynb_checkpoints
